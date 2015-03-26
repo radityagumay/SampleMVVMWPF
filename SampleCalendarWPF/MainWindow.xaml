@@ -1,0 +1,23 @@
+﻿<Window x:Class="SampleCalendarWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="350" Width="350">
+    <Grid>
+        <StackPanel>
+            <DatePicker
+                VerticalAlignment="Center" SelectedDateFormat="Long"
+                HorizontalAlignment="Stretch"
+                SelectedDate="{Binding Path=., Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDateChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedDateChangeCommand}"
+                                               CommandParameter="{Binding ElementName=dpEventDate, Path=SelectedDate}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DatePicker>
+        </StackPanel>
+    </Grid>
+</Window>
